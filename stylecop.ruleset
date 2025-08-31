@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="Cupid Rules" Description="Minimal ruleset to satisfy CodeAnalysisRuleSet path" ToolsVersion="16.0">
+  <Rules AnalyzerId="Microsoft.CodeAnalysis.CSharp" RuleNamespace="Microsoft.CodeAnalysis.CSharp">
+  </Rules>
+</RuleSet>
+
