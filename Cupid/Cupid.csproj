@@ -1,17 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <Version>0.0.1</Version>
-    <Description>Cupid Mod</Description>
-    <RootNamespace>Cupid</RootNamespace>
-  </PropertyGroup>
+    <PropertyGroup>
+        <Version>0.0.1</Version>
+        <Description>Cupid Mod</Description>
+        <RootNamespace>Cupid</RootNamespace>
+	    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+     </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AllOfUs.MiraAPI" Version="0.2.1" />
-    <PackageReference Include="Reactor" Version="2.3.1" />
-    <PackageReference Include="BepInEx.AutoPlugin" Version="1.1.0" PrivateAssets="all" />
-  </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Include="Resources\**\*.*"/>
+    </ItemGroup>
 
-  <Target Name="Copy" AfterTargets="Build" Condition="'$(AmongUs)' != ''">
-    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(AmongUs)/BepInEx/plugins/" UseSymboliclinksIfPossible="true" />
-  </Target>
+    <Import Project="../AmongUs.props"/>
+  
 </Project>

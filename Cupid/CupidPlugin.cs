@@ -26,7 +26,7 @@ public partial class CupidPlugin : BasePlugin, IMiraPlugin
 
     public override void Load()
     {
-        ReactorCredits.Register(Name, Version, false, ReactorCredits.AlwaysShow);
+        ReactorCredits.Register(Name, Version, true, location => location == ReactorCredits.Location.MainMenu);
         Harmony.PatchAll();
     }
 }
