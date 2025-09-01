@@ -16,7 +16,7 @@ public class CupidShootButton : CustomActionButton<PlayerControl>
 
     public override bool Enabled(RoleBehaviour? role)
     {
-        return role is CupidRole && CupidRole.SelectedPlayers.Count < 2;
+        return role is CupidRole;
     }
 
     protected override void OnClick()
@@ -40,7 +40,12 @@ public class CupidShootButton : CustomActionButton<PlayerControl>
 
     public override bool IsTargetValid(PlayerControl? target)
     {
-        return target != null && target != PlayerControl.LocalPlayer && !CupidRole.SelectedPlayers.Contains(target);
+        return target != null && target != PlayerControl.LocalPlayer && !CupidRole.SelectedPlayers.Contains(target) && CupidRole.SelectedPlayers.Count < 2;
+    }
+
+    public override bool CanUse()
+    {
+        return base.CanUse() && CupidRole.SelectedPlayers.Count < 2;
     }
     
 }

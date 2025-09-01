@@ -17,13 +17,17 @@ public class CupidRole : CrewmateRole, ICustomRole
     public CustomRoleConfiguration Configuration => new()
     {
         MaxRoleCount = 1,
-        OptionsScreenshot = Assets.CupidRoleBanner,
+        OptionsScreenshot = MiraAssets.Empty,
         Icon = MiraAssets.Empty,
         CanGetKilled = true,
         UseVanillaKillButton = false,
         CanUseVent = false,
         TasksCountForProgress = true,
+        CanUseSabotage = false,
+        DefaultChance = 100,
+        DefaultRoleCount = 1,
         CanModifyChance = true,
-        ShowInFreeplay = true
+        RoleHintType = RoleHintType.RoleTab,
+        ShowInFreeplay = true,
     };
 }
