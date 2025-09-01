@@ -1,4 +1,6 @@
+using Cupid.Options;
 using Cupid.Roles;
+using MiraAPI.GameOptions;
 using MiraAPI.Hud;
 using MiraAPI.Utilities;
 using MiraAPI.Utilities.Assets;
@@ -9,7 +11,7 @@ namespace Cupid.Buttons;
 public class CupidShootButton : CustomActionButton<PlayerControl>
 {
     public override string Name => "Shoot Arrow";
-    public override float Cooldown => 10f;
+    public override float Cooldown => OptionGroupSingleton<CupidOptionsGroup>.Instance.ShootCooldown;
     public override float EffectDuration => 0f;
     public override int MaxUses => 2;
     public override LoadableAsset<Sprite> Sprite => Assets.CupidShootButton;

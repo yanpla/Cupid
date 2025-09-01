@@ -1,5 +1,6 @@
 using MiraAPI.Roles;
 using MiraAPI.Utilities.Assets;
+using TownOfUs.Utilities;
 using UnityEngine;
 
 namespace Cupid.Roles;
@@ -30,4 +31,22 @@ public class CupidRole : CrewmateRole, ICustomRole
         RoleHintType = RoleHintType.RoleTab,
         ShowInFreeplay = true,
     };
+
+    public static void onRoundStart()
+    {
+        if (SelectedPlayers.Count != 2 || SelectedPlayers.Any(p => p.Data == null || p.Data.Disconnected || p.Data.IsDead))
+        { 
+            foreach (var p in SelectedPlayers)
+                p.cosmetics.SetOutline(false, new Il2CppSystem.Nullable<Color>(Color.magenta));
+
+            SelectedPlayers.Clear();
+            PlayerControl.LocalPlayer.RpcChangeRole(0); // Revert to Crewmate
+            return;
+        }
+
+        TownOfUs.Modifiers.Game.Alliance.LoverModifier.RpcSetOtherLover(
+            SelectedPlayers[0], 
+            SelectedPlayers[1]
+        );
+    }
 }

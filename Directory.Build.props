@@ -40,4 +40,7 @@
     <PropertyGroup>
         <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)\stylecop.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
+	<PropertyGroup>
+		<AmongUs>C:\Users\yanpl\Desktop\TOU Mira</AmongUs> <!-- change to your path -->
+	</PropertyGroup>
 </Project>

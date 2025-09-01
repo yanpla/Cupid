@@ -8,6 +8,7 @@ using Reactor;
 using Reactor.Networking;
 using Reactor.Networking.Attributes;
 using Reactor.Utilities;
+using TownOfUs;
 
 namespace Cupid;
 
@@ -15,6 +16,7 @@ namespace Cupid;
 [BepInProcess("Among Us.exe")]
 [BepInDependency(ReactorPlugin.Id)]
 [BepInDependency(MiraApiPlugin.Id)]
+[BepInDependency(TownOfUsPlugin.Id)]
 [ReactorModFlags(ModFlags.RequireOnAllClients)]
 public partial class CupidPlugin : BasePlugin, IMiraPlugin
 {
