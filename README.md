@@ -4,7 +4,7 @@ Bring romance (and chaos) to your lobbies. As **Cupid**, shoot two players with
 arrows; they’re marked with a magenta outline and will become **Lovers** at the
 end of the first meeting. If one Lover dies, the other follows.
 
-> **Important:** This mod **requires [TownOfUs Mira](https://github.com/AU-Avengers/TOU-Mira)**.
+> **Important:** This mod **requires [Town Of Us - Mira](https://github.com/AU-Avengers/TOU-Mira)**.
 
 ---
 
