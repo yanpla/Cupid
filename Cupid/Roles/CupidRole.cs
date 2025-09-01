@@ -1,5 +1,10 @@
+using MiraAPI.Modifiers;
 using MiraAPI.Roles;
 using MiraAPI.Utilities.Assets;
+using Reactor.Networking.Attributes;
+using Reactor.Utilities;
+using TownOfUs;
+using TownOfUs.Modifiers.Game.Alliance;
 using TownOfUs.Utilities;
 using UnityEngine;
 
@@ -10,8 +15,8 @@ public class CupidRole : CrewmateRole, ICustomRole
     public static List<PlayerControl> SelectedPlayers { get; } = new();
     
     public string RoleName => "Cupid";
-    public string RoleLongDescription => "Make two players fall in love. If one lover dies, the other dies too.";
-    public string RoleDescription => RoleLongDescription;
+    public string RoleLongDescription => "Make two players fall in love. If one lover dies, the other dies too. (1st round only, players become Lovers after first meeting)";
+    public string RoleDescription => "Make two players fall in love.";
     public Color RoleColor { get; } = Color.magenta;
     public ModdedRoleTeams Team => ModdedRoleTeams.Crewmate;
     public RoleOptionsGroup RoleOptionsGroup { get; } = RoleOptionsGroup.Crewmate;
@@ -44,9 +49,24 @@ public class CupidRole : CrewmateRole, ICustomRole
             return;
         }
 
-        TownOfUs.Modifiers.Game.Alliance.LoverModifier.RpcSetOtherLover(
+        RpcSetOtherLover(
             SelectedPlayers[0], 
             SelectedPlayers[1]
         );
+    }
+    
+    [MethodRpc((uint)TownOfUsRpc.SetOtherLover)]
+    private static void RpcSetOtherLover(PlayerControl player, PlayerControl target)
+    {
+        if (PlayerControl.AllPlayerControls.ToArray().Where(x => x.HasModifier<LoverModifier>()).ToList().Count > 0)
+        {
+            Logger<CupidPlugin>.Error("RpcSetOtherLover - Lovers Already Spawned!");
+            return;
+        }
+
+        var targetModifier = target.AddModifier<LoverModifier>();
+        var sourceModifier = player.AddModifier<LoverModifier>();
+        targetModifier!.OtherLover = player;
+        sourceModifier!.OtherLover = target;
     }
 }
