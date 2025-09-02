@@ -10,7 +10,7 @@
 
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
 
-        <Version>0.0.2</Version>
+        <Version>0.0.3</Version>
 
         <Authors>yanpla</Authors>
         <RepositoryType>git</RepositoryType>

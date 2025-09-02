@@ -4,7 +4,10 @@ using MiraAPI.Events;
 using MiraAPI.Events.Vanilla.Gameplay;
 using MiraAPI.Events.Vanilla.Player;
 using MiraAPI.Hud;
+using MiraAPI.Modifiers;
 using UnityEngine;
+using TownOfUs.Modifiers.Game.Alliance;
+using System.Linq;
 
 namespace Cupid.Events;
 
@@ -13,8 +16,21 @@ public static class CupidEvents
   [RegisterEvent]
   public static void HandleRoundStartEvent(RoundStartEvent @event)
   {
-    if (@event.TriggeredByIntro) return;
     if (PlayerControl.LocalPlayer.Data.Role is not CupidRole) return;
+    
+    // When triggered by intro and cupid exists: if any player has LoverModifier, remove it and return
+    if (@event.TriggeredByIntro)
+    {
+      foreach (var pc in PlayerControl.AllPlayerControls)
+      {
+        if (pc == null || pc.Data == null || pc.Data.Disconnected) continue;
+
+        // Check for Lover modifier and remove it from everyone
+        if (!pc.HasModifier<LoverModifier>()) continue;
+        pc.RpcRemoveModifier<LoverModifier>();
+      }
+      return;
+    }
     
     CupidRole.onRoundStart();
   }
